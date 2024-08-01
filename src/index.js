@@ -12,7 +12,7 @@ const redisCache = new Redis(); // Create Redis client
 
 const io = new Server(httpServer, { 
     cors: {
-        origin: "http://localhost:5500",//frontend url 
+        origin: "http://localhost:5501",//frontend url 
         methods: ["GET", "POST"]
     }
  }); // Create socket.io server
@@ -28,9 +28,6 @@ io.on("connection", (socket) => {
         const connId = await redisCache.get(userId);
         console.log("Getting connection id for user id", userId, connId);
         socket.emit('connectionId', connId);
-        const everything = await redisCache.keys('*');
-
-        console.log(everything)
     })
 
 });
